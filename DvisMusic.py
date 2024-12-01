@@ -244,33 +244,36 @@ async def paste_queue(content):
 async def start_message_private(client, message):
     mention = message.from_user.mention
     caption = f"""
-╭───────────────────⦿‍
-│❍ • ʜᴇʏ  {mention} •‍
-│❍ • ɪ ᴀᴍ  @{bot.me.username}•‍
+╭──────────────────⦿‍
+│❍ merahaba  {mention} •‍
+│❍ • ben  @{bot.me.username}•‍
 ├───────────────────⦿‍
-│❍ • ɪ ʜᴀᴠᴇ sᴘᴇᴄɪᴀʟ ғᴇᴀᴛᴜʀᴇs •‍
+│❍ • bir çok ozellikli telegram botuyum •‍
 ├───────────────────⦿‍
-│❍ • ᴀ ғᴀsᴛ & ᴘᴏᴡᴇʀғᴜʟ ᴛᴇʟᴇɢʀᴀᴍ ᴍᴜsɪᴄ‍
-│  ʙᴏᴛ ᴡɪᴛʜ ᴀᴡᴇsᴏᴍᴇ ғᴇᴀᴛᴜʀᴇs‍
-│❍ • ʏᴏᴜ ᴄᴀɴ ᴘʟᴀʏ ᴍᴜꜱɪᴄ + ᴠɪᴅᴇᴏ •‍
-│❍ • ʙᴇsᴛ ǫᴜɪʟɪᴛʏ ᴍᴜsɪᴄ sᴏᴜɴᴅ •‍
-│❍ • ɴᴏ ʟᴀɢs + ɴᴏ ᴀᴅs •‍
-│❍ • 24x7 ᴏɴʟɪɴᴇ sᴜᴘᴘᴏʀᴛ •‍
+│❍ • 
+│❍ • beni grubuna eklemekten çekinme •‍
 ├───────────────────⦿‍
-│      [✰ 𝖮ᴡ፝֠֩𝛈𝛆ʀ  ✰](https://t.me/DvisDmBot)
-╰───────────────────⦿"""
-    buttons = InlineKeyboardMarkup(
-        [
+│    [kumsal ekibi ✰](https://t.me/kumsaldestekkanal)
+╰───────────────────⦿
+"""
+buttons = InlineKeyboardMarkup(
             [
-                InlineKeyboardButton(
-                    text="• ᴧᴅᴅ мᴇ ʙᴧʙʏ •",
-                    url=f"https://t.me/{bot.me.username}?startgroup=true",
-                )
-            ],
-            [
-                InlineKeyboardButton(
-                    text="💌 𝖧ᴇʟᴘ $ 𝖢ᴏᴍᴍᴀɴᴅs 💌",
-                    callback_data="help_command_list",
+                [
+                    InlineKeyboardButton(
+                        text="❖ Beni grubuna ekle  ❖",
+                        url=f"https://t.me/{bot.me.username}?startgroup=true",
+                    )
+                ],
+                [
+            InlineKeyboardButton(text="💅Kurucu💅", url="https://t.me/kizilkarii"),
+                    ),
+            InlineKeyboardButton(text="🥀destek🥀", url="https://t.me/whiskeyclubb"),
+                   ],
+                [
+             )
+                   InlineKeyboardButton(
+                        text="🤖Yarım komutlar🤖",
+                        callback_data="open_command_list",
                 )
             ],
         ]
@@ -300,15 +303,12 @@ async def open_command_list_alert(client, query):
     caption = """**🥀 tüm üyelere geçerli komutlar:**
 /oynat - müzik oynatır 
 /voynat - video oynatır 
-**👾 yanlızca yöneticiler:**
-/play - VC'de Yalnızca Ses Akışı.
-/vplay - Videoyla Sesi Yayınla.
 
 **👾 Yalnızca Sohbet Yöneticileri İçin:**
-/pause - Çalışan Akışı duraklatın.
-/resume - Duraklatılmış Akışı devam ettirir.
-/skip - Geçerli Akışı Sonrakine Atla.
-/end - Geçerli Çalışan Akışı Durdurun.
+/dur - Çalışan Akışı duraklatın.
+/devam - Duraklatılmış Akışı devam ettirir.
+/atla - Geçerli Akışı Sonrakine Atla.
+/son - Geçerli Çalışan Akışı Durdurun.
 
 **Not:** Tüm Komutlar Çalışacaktır
 Yalnızca Kanallarda/Gruplarda çalışacaktır."""
@@ -354,9 +354,11 @@ async def back_to_home_menu(client, query):
                 ],
                 [
             InlineKeyboardButton(text="💅Kurucu💅", url="https://t.me/kizilkarii"),
+                    ),
             InlineKeyboardButton(text="🥀destek🥀", url="https://t.me/whiskeyclubb"),
-                ],
-                [
+                    )
+                 ],
+                 [
                     InlineKeyboardButton(
                         text="🤖Yarım komutlar🤖",
                         callback_data="open_command_list",
@@ -768,7 +770,7 @@ async def get_call_status(chat_id):
     return call_status
 
 
-@bot.on_message(cdz(["play", "vplay"]) & ~pyrofl.private)
+@bot.on_message(cdz(["oynat", "voynat"]) & ~pyrofl.private)
 async def stream_audio_or_video(client, message):
     try:
         await message.delete()
@@ -1065,7 +1067,7 @@ async def stream_audio_or_video(client, message):
             return
 
 
-@bot.on_message(cdx(["dur", "vpause"]) & ~pyrofl.private)
+@bot.on_message(cdx(["dur", "vdur"]) & ~pyrofl.private)
 async def pause_running_stream_on_vc(client, message):
     chat_id = message.chat.id
     try:
@@ -1092,7 +1094,7 @@ async def pause_running_stream_on_vc(client, message):
             return
 
 
-@bot.on_message(cdx(["devam", "vresume"]) & ~pyrofl.private)
+@bot.on_message(cdx(["devam", "vdevam"]) & ~pyrofl.private)
 async def resume_paused_stream_on_vc(client, message):
     chat_id = message.chat.id
     try:
@@ -1119,7 +1121,7 @@ async def resume_paused_stream_on_vc(client, message):
             return
 
 
-@bot.on_message(cdx(["atla", "vskip"]) & ~pyrofl.private)
+@bot.on_message(cdx(["atla", "vatla"]) & ~pyrofl.private)
 async def skip_and_change_stream(client, message):
     chat_id = message.chat.id
     try:
@@ -1161,7 +1163,7 @@ async def skip_and_change_stream(client, message):
             return
 
 
-@bot.on_message(cdx(["end", "vend"]) & ~pyrofl.private)
+@bot.on_message(cdx(["son", "vson"]) & ~pyrofl.private)
 async def stop_stream_and_leave_vc(client, message):
     chat_id = message.chat.id
     try:
@@ -1171,9 +1173,9 @@ async def stop_stream_and_leave_vc(client, message):
     try:
         call_status = await get_call_status(chat_id)
         if call_status == "NOTHING":
-            return await message.reply_text("**❎ Nᴏᴛʜɪɴɢ Sᴛʀᴇᴀᴍɪɴɢ❗**")
+            return await message.reply_text("**❎ durduralacak birşey yok ❗**")
         elif call_status == "IDLE":
-            return await message.reply_text("**✅ Sᴜᴄᴄᴇsғᴜʟʟʏ Lᴇғᴛ Fʀᴏᴍ VC❗**")
+            return await message.reply_text("**✅ akış durdururldu❗**")
         elif call_status == "PLAYING" or call_status == "PAUSED":
             await close_stream(chat_id)
             return await message.reply_text("**❎ 𝐒ᴛᴏᴘᴘᴇᴅ 𝐒ᴛʀᴇᴀᴍ & 𝐋ᴇғᴛ\n𝐅ʀᴏᴍ 𝐕ᴄ  ❗...**")
